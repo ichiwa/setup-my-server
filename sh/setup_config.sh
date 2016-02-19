@@ -4,7 +4,7 @@ chmod 600 ./../private_key
 
 cp ./../private_key ./../backup_keys/private_key_$(date +%Y-%m-%d_%H-%M-%S)
 
-PRIVATE_KEY_PATH=$(echo `pwd`)/private_key
+PRIVATE_KEY_PATH=$(echo `pwd`)/../private_key
 
 echo "# XXX
 Host XXX
