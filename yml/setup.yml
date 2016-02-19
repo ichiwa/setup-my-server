@@ -46,7 +46,7 @@
           replace: 'AuthorizedKeysFile	.ssh/authorized_keys'
       notify: systemctl restart sshd.service
 
-    - name: allow sudo with password 
+    - name: allow sudo without password 
       lineinfile:
         dest: /etc/sudoers
         state: present
