@@ -12,4 +12,4 @@
       changed_when: false
 
     - name: fetch id_rsa file
-      fetch: src=~/.ssh/id_rsa dest=./private_key flat=yes
+      fetch: src=~/.ssh/id_rsa dest=./../private_key flat=yes

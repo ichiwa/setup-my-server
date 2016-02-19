@@ -6,13 +6,13 @@ result=$(echo $menu | ./sentaku/bin/sentaku)
 echo $result
 
 if [ $result = "setup" ]; then
-ansible-playbook -i root-hosts setup.yml -c paramiko
+ansible-playbook -i ./hosts/root-hosts ./yml/setup.yml -c paramiko
 elif [ $result = "setup_user" ]; then
-ansible-playbook -i user-pw-hosts setup_user.yml -c paramiko
+ansible-playbook -i ./hosts/user-pw-hosts ./yml/setup_user.yml -c paramiko
 elif [ $result = "setup_config" ]; then
-./setup_config.sh
+./sh/setup_config.sh
 elif [ $result = "setup_nginx" ]; then
-ansible-playbook -i user-hosts setup_nginx.yml -c paramiko
+ansible-playbook -i ./hosts/user-hosts ./yml/setup_nginx.yml -c paramiko
 elif [ $result = "disallow_pw_login" ]; then
-ansible-playbook -i root-hosts disallow_password_login.yml -c paramiko
+ansible-playbook -i ./hosts/root-hosts ./yml/disallow_password_login.yml -c paramiko
 fi
