@@ -1,0 +1,59 @@
+- hosts: root-login
+
+  vars:
+    user: ichiwa
+    password: $6$ichiwa$eMivSHkmuyIlHQwusbvtIjtW1DhcEE2qfDeEwKIzRiQc00IheqUfuSDGQkfe3/Ee8ctojT.bI58.nfxJPztcT0
+
+  vars_prompt:
+  - name: update_yum
+    prompt: "Are you sure you want to update yum?"
+    private: no
+    default: n
+
+  tasks:
+    - name: update_yum_packages
+      yum: name=* state=latest
+      when: update_yum == "y"
+
+    - name: add user
+      user: name={{ user }}
+            password={{ password }}
+            generate_ssh_key=yes
+            ssh_key_bits=2048
+            ssh_key_file=.ssh/id_rsa
+      changed_when: false
+
+    - name: add user to wheel group
+      shell: gpasswd -a ichiwa wheel
+      ignore_errors: true
+      changed_when: false
+
+    # change RSAAuthentication to yes
+    # change PubkeyAuthentication to yes
+    # change AuthorizedKeysFile	.ssh/authorized_keys
+    - name: change sshd_config settings
+      replace:
+          dest: /etc/ssh/sshd_config
+          regexp: '#RSAAuthentication[^\n]*'
+          replace: 'RSAAuthentication yes'
+      replace:
+          dest: /etc/ssh/sshd_config
+          regexp: '#PubkeyAuthentication[^\n]*'
+          replace: 'PubkeyAuthentication yes'
+      replace:
+          dest: /etc/ssh/sshd_config
+          regexp: '#AuthorizedKeysFile[^\n]*'
+          replace: 'AuthorizedKeysFile	.ssh/authorized_keys'
+      notify: systemctl restart sshd.service
+
+    - name: allow sudo with password 
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+  handlers:
+
+  - name: systemctl restart sshd.service
+    shell: systemctl restart sshd.service

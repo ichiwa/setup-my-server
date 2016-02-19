@@ -1,0 +1,8 @@
+[ichiwa-login-pw]
+
+
+[ichiwa-login-pw:vars]
+ansible_ssh_port=22
+ansible_ssh_user=ichiwa
+ansible_ssh_pass=
+ansible_sudo_password=

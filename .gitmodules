@@ -1,0 +1,3 @@
+[submodule "sentaku"]
+	path = sentaku
+	url = git@github.com:rcmdnk/sentaku.git

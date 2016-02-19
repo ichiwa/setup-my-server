@@ -1,0 +1,15 @@
+- hosts: ichiwa-login-pw
+
+  tasks:
+    - name: mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+      command: mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+      ignore_errors: true
+      changed_when: false
+
+    - name: chmod 600 ~/.ssh/authorized_keys
+      command: chmod 600 ~/.ssh/authorized_keys
+      ignore_errors: true
+      changed_when: false
+
+    - name: fetch id_rsa file
+      fetch: src=~/.ssh/id_rsa dest=./private_key flat=yes
