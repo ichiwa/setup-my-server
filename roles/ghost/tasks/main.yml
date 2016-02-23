@@ -1,0 +1,31 @@
+---
+# Create share directory
+- name: Create share directory
+  file:
+    path: "{{ www_dir }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+
+# Install npm packages for ghost
+- name: Install npm packages for ghost
+  npm: name="{{ item }}" global=yes
+  with_items:
+    - forever
+    - grunt-cli
+
+# Git clone ghost
+- name: Git clone ghost
+  git: repo=git://github.com/tryghost/ghost.git dest="{{ www_dir }}/ghost"
+  become: true
+  become_user: "{{ user }}"
+
+# Install ghost
+- name: Install ghost
+  command: "GHOST_NODE_VERSION_CHECK=false && npm install --production"
+  become: true
+  become_user: "{{ user }}"
+  ignore_errors: yes
+  args:
+    chdir: "{{ www_dir }}/ghost"

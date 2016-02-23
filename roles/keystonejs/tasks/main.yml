@@ -1,0 +1,27 @@
+---
+# Create share directory
+- name: Create share directory
+  file:
+    path: "{{ www_dir }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+
+- name: install keystonejs
+  npm: name=generator-keystone global=yes
+
+- name: Create project directory
+  file:
+    path: "{{ www_dir }}/cms"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Run the generator-keystone
+  command: "yo keystone"
+  become: true
+  become_user: "{{ user }}"
+  ignore_errors: yes
+  args:
+    chdir: "{{ www_dir }}/cms"

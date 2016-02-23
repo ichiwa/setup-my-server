@@ -1,0 +1,17 @@
+---
+- name: Setup Server
+  hosts: my-server
+  remote_user: root
+
+  vars_prompt:
+  - name: updateYum
+    prompt: "Are you sure you want to update yum?"
+    private: yes
+    default: n
+
+  roles:
+    - common
+    - nginx
+    - nodejs
+    - ghost
+    - create_user

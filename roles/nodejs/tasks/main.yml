@@ -1,0 +1,10 @@
+---
+- name: install npm
+  yum: name=npm state=latest enablerepo=epel
+
+- name: install n
+  npm: name=n global=yes
+
+# install node.js by n command
+- name: install stable node.js
+  shell: n stable

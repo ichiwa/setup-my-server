@@ -1,0 +1,26 @@
+---
+# Create share directory
+- name: Create share directory
+  file:
+    path: "{{ www_dir }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+
+# Git clone Wp-calypso
+- name: Git clone Wp-Calypso
+  git:
+    repo: https://github.com/Automattic/wp-calypso.git
+    dest: "{{ www_dir }}/calypso"
+  become: true
+  become_user: "{{ user }}"
+
+# Install packages for wp-calypso
+- name: Install packages for wp-calypso
+  command: "npm install ."
+  become: true
+  become_user: "{{ user }}"
+  ignore_errors: yes
+  args:
+    chdir: "{{ www_dir }}/calypso"

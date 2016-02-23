@@ -1,0 +1,13 @@
+---
+# Create share directory
+- name: Create share directory
+  file:
+    path: "{{ www_dir }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+
+# Install Hexo
+- name: Install Hexo
+  npm: name=hexo-cli global=yes
