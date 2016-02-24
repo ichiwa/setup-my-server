@@ -1,0 +1,8 @@
+[{
+  "name"      : "ghost",
+  "script"    : "./index.js",
+  "env": {
+      "NODE_ENV": "production",
+      "GHOST_NODE_VERSION_CHECK": "false"
+  }
+}]

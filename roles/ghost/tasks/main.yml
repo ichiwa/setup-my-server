@@ -8,24 +8,37 @@
     group: "{{ user }}"
     mode: 0755
 
-# Install npm packages for ghost
-- name: Install npm packages for ghost
-  npm: name="{{ item }}" global=yes
-  with_items:
-    - forever
-    - grunt-cli
+# Install pm2
+- name: Install pm2
+  npm: name=pm2 global=yes
 
-# Git clone ghost
-- name: Git clone ghost
-  git: repo=git://github.com/tryghost/ghost.git dest="{{ www_dir }}/ghost"
+# Download ghost realesed version
+- name: Download ghost realesed version
+  get_url: url="{{ ghost_download_url }}" dest="{{ www_dir }}/ghost.zip"
   become: true
   become_user: "{{ user }}"
 
+# Unzip ghost
+- name: Unzip ghost
+  command: unzip -n ghost.zip -d ghost
+  become: true
+  become_user: "{{ user }}"
+  args:
+    chdir: "{{ www_dir }}"
+
 # Install ghost
 - name: Install ghost
-  command: "GHOST_NODE_VERSION_CHECK=false && npm install --production"
+  shell: GHOST_NODE_VERSION_CHECK=false npm install --production
   become: true
   become_user: "{{ user }}"
   ignore_errors: yes
   args:
     chdir: "{{ www_dir }}/ghost"
+
+# Copy ghost configuration
+- name: Copy ghost configuration
+  copy: src=config.js dest="{{ www_dir }}/ghost/config.js" owner="{{ user }}" group="{{ user }}"
+
+# Copy pm2 script
+- name: Copy pm2 configuration
+  copy: src=ghost.json dest="{{ www_dir }}/ghost/ghost.json" owner="{{ user }}" group="{{ user }}"

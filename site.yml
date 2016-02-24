@@ -11,7 +11,8 @@
 
   roles:
     - common
+    - create_user
     - nginx
     - nodejs
+    - mariadb
     - ghost
-    - create_user
