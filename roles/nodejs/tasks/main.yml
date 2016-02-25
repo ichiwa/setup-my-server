@@ -1,10 +1,14 @@
 ---
-- name: install npm
+- name: Install npm
   yum: name=npm state=latest enablerepo=epel
 
-- name: install n
-  npm: name=n global=yes
+# Install
+- name: Install node packages
+  npm: name={{ item }} global=yes
+  with_items:
+    - elasticdump
+    - n
 
 # install node.js by n command
-- name: install stable node.js
+- name: Install stable node.js
   shell: n stable

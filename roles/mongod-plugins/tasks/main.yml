@@ -1,9 +1,11 @@
 ---
 - name: Install MongoDB River Plugin 2.0.2
   shell: "/usr/share/elasticsearch/bin/plugin --install com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/2.0.2"
+  ignore_errors: true
 
 - name: Install Kuromoji Analysis Plugin 2.3.0
   shell: "/usr/share/elasticsearch/bin/plugin --install elasticsearch/elasticsearch-analysis-kuromoji/2.3.0"
+  ignore_errors: true
 
 - name: Copy Elasticsearch Configuration file
   copy: src=elasticsearch.yml dest=/etc/elasticsearch/
