@@ -9,3 +9,4 @@
     - wget
     - git
     - telnet
+    - java-1.7.0-openjdk

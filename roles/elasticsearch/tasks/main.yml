@@ -1,0 +1,9 @@
+---
+- name: Copy the Elastic-search repository definition
+  copy: src=elasticsearch.repo dest=/etc/yum.repos.d/
+
+- name: Install elasticsearch
+  yum: name="{{ item }}" state=present
+  notify: restart elasticsearch
+  with_items:
+    - elasticsearch

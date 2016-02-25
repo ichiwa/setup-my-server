@@ -11,7 +11,16 @@ config = {
     // Configure your URL and mail settings here
     production: {
         url: '', // required
-        mail: {},
+        mail: {
+            transport: 'SMTP',
+            options: {
+                service: 'Gmail',
+                auth: {
+                    user: '',
+                    pass: ''
+                }
+            }
+        },
 		database: {
     		client: 'mysql',
     		connection: {

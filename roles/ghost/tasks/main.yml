@@ -42,3 +42,7 @@
 # Copy pm2 script
 - name: Copy pm2 configuration
   copy: src=ghost.json dest="{{ www_dir }}/ghost/ghost.json" owner="{{ user }}" group="{{ user }}"
+
+# Start ghost on the pm2
+- name: Start ghost on the pm2
+  shell: pm2 start ghost.json

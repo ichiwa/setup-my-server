@@ -1,0 +1,28 @@
+---
+- name: Copy the Mongodb repository definition
+  copy: src=mongodb.repo dest=/etc/yum.repos.d/
+
+- name: Install mongodb
+  yum: name="{{ item }}" state=present
+  with_items:
+    - mongodb-org
+    - mongodb-org-server
+
+- name: Create data directory for mongodb
+  file: path=/data/db state=directory owner=mongod group=mongod
+
+- name: Copy the Mongodb Configuration
+  copy: src=mongod.conf dest=/etc/ owner=mongod group=mongod
+
+- name: Set Readhead size for mongodb
+  command: blockdev --setra 256 /dev/mapper/centos-root
+
+- name: Start MongoDB Service
+  service: name=mongod state=started enabled=yes
+
+- name: Copy Replica Set js
+  copy: src=replica_set.js dest=/tmp/ owner=mongod group=mongod
+
+- name: Initiate Replica Set
+  command: "mongo /tmp/replica_set.js"
+  notify: restart mongod

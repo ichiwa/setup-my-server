@@ -1,7 +1,0 @@
----
-user:
-password:
-authorized_keys_dir: "/home/{{ user }}/.ssh"
-authorized_keys_file: "authorized_keys"
-
-www_dir: "/home/www"

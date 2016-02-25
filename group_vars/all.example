@@ -1,0 +1,12 @@
+---
+user:
+password:
+authorized_keys_dir: "/home/{{ user }}/.ssh"
+authorized_keys_file: "authorized_keys"
+
+www_dir: "/home/www"
+
+ghost_download_url: https://github.com/TryGhost/Ghost/releases/download/0.7.8/Ghost-0.7.8.zip
+
+mysql_root_password:
+mysql_ghost_password: 
