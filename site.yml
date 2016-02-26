@@ -1,6 +1,6 @@
 ---
 - name: Setup Server
-  hosts: my-server
+  hosts: dev
   remote_user: root
 
   vars_prompt:
