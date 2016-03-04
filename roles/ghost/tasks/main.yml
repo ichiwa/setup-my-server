@@ -18,9 +18,14 @@
   become: true
   become_user: "{{ user }}"
 
+- name: wait for downloading ghost.zip
+  wait_for:
+    path: "{{ www_dir }}/ghost.zip"
+    state: started
+
 # Unzip ghost
 - name: Unzip ghost
-  command: unzip -n ghost.zip -d ghost
+  command: unzip -n "{{ www_dir }}/ghost.zip" -d "{{ www_dir }}/ghost"
   become: true
   become_user: "{{ user }}"
   args:

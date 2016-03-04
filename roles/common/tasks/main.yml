@@ -1,5 +1,5 @@
 - name: Update yum packages
-  yum: name=* state=latest
+  yum: name=* state=latest exclude=kernel*
   when: updateYum == "y"
 
 - name: install required packages
@@ -9,4 +9,5 @@
     - wget
     - git
     - telnet
+    - unzip
     - java-1.7.0-openjdk

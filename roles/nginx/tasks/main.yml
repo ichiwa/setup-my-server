@@ -1,4 +1,7 @@
 ---
+- name: start firewalld
+  service: name=firewalld state=started
+
 - name: Copy the NGINX repository definition
   copy: src=nginx.repo dest=/etc/yum.repos.d/
 
