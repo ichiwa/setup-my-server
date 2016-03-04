@@ -12,6 +12,12 @@ Setup CentOS7 by Ansible.
 6. Update Ghost parameters, (ex, `vi ./roles/ghost/files/config.js`)
 7. `ansible-playbook -i hosts site.yml -c paramiko`
 
+## Development
+1. `vagrant box add centos7 https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.1/vagrant-centos-7.1.box `
+2. Update Vagrantfile
+3. `vagrant up`
+like that...
+ 
 ### Ansible Roles
 * common
 * create-user
