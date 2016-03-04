@@ -17,7 +17,7 @@ Setup CentOS7 by Ansible.
 2. Update Vagrantfile
 3. `vagrant up`
 like that...
- 
+
 ### Ansible Roles
 * common
 * create-user
@@ -27,4 +27,4 @@ like that...
 * mongod
 * elasticsearch
 * mongod-plugins (for japanese)
-* ghost (OSS CMS blog engine)
+* [ghost](https://github.com/TryGhost/Ghost)
