@@ -4,3 +4,5 @@ group_vars/all
 hosts
 dev-hosts
 .vagrant
+*.sql
+*.zip
