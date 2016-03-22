@@ -4,5 +4,6 @@
   "env": {
       "NODE_ENV": "production",
       "GHOST_NODE_VERSION_CHECK": "false"
-  }
+  },
+  "ignore_watch" : ["node_modules", "content/images"]
 }]
