@@ -57,3 +57,8 @@
 - name: Create Ghost database
   shell: "mysqladmin -uroot -p{{ mysql_ghost_password }} create ghost"
   ignore_errors: true
+
+# Create peacem database
+- name: Create peacem database
+  shell: "mysqladmin -uroot -p{{ mysql_ghost_password }} create peacem"
+  ignore_errors: true
