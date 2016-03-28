@@ -12,19 +12,25 @@
 - name: Install pm2
   npm: name=pm2 global=yes
 
+- stat: path="{{ www_dir }}/ghost"
+  register: ghost
+
 # Download ghost realesed version
 - name: Download ghost realesed version
+  when: not ghost.stat.exists
   get_url: url="{{ ghost_download_url }}" dest="{{ www_dir }}/ghost.zip"
   become: true
   become_user: "{{ user }}"
 
 - name: wait for downloading ghost.zip
+  when: not ghost.stat.exists
   wait_for:
     path: "{{ www_dir }}/ghost.zip"
     state: started
 
 # Unzip ghost
 - name: Unzip ghost
+  when: not ghost.stat.exists
   command: unzip -n "{{ www_dir }}/ghost.zip" -d "{{ www_dir }}/ghost"
   become: true
   become_user: "{{ user }}"
@@ -33,6 +39,7 @@
 
 # Install ghost
 - name: Install ghost
+  when: not ghost.stat.exists
   shell: GHOST_NODE_VERSION_CHECK=false npm install --production
   become: true
   become_user: "{{ user }}"

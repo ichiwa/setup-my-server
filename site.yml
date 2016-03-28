@@ -1,6 +1,6 @@
 ---
 - name: Setup Server
-  hosts: dev
+  hosts: cocoa
   remote_user: root
 
   vars_prompt:
