@@ -18,6 +18,10 @@ Setup CentOS7 by Ansible.
 3. `vagrant up`
 like that...
 
+### If cached the Error 
+#### Directory command 
+`ansible-playbook -i dev-hosts site.yml -c paramiko`
+
 ### Ansible Roles
 * common
 * create-user
