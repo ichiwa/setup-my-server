@@ -15,6 +15,7 @@
     - nginx
     - nodejs
     - mariadb
+    - npm
     # - mongod
     # - elasticsearch
     # - mongod-plugins # full-text search for japanese

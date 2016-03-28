@@ -1,0 +1,6 @@
+---
+# Install packages
+- name: Install node packages
+  npm: name={{ item }} global=yes
+  with_items:
+    - sequelize-cli
