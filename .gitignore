@@ -6,3 +6,4 @@ dev-hosts
 .vagrant
 *.sql
 *.zip
+.c9/

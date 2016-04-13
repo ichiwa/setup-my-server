@@ -11,3 +11,8 @@
     - telnet
     - unzip
     - java-1.7.0-openjdk
+    - redis
+
+- name: restart redis
+  service: name=redis state=restarted
+
